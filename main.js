@@ -1,3 +1,4 @@
+#!/usr/bin/env node
 var argv = require('optimist')
     .usage("execute command with node version acceptable to engine package.json property\nusage: $0")
     .demand('c')

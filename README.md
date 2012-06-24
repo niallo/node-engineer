@@ -32,16 +32,12 @@ Demo
 
 ```
 $ engineer -f package.json -c 'npm ls'
-local versions: []
-Remote version 0.6.19 satisfies range >=0.6.0 <0.7.0
+local versions: ["0.6.19"]
+Local version 0.6.19 satisfies range >=0.6.0 <0.7.0
 running cmd: ["./node_modules/nave/nave.sh","use","0.6.19","npm","ls"]
-Already installed: 0.6.19
-
-using 0.6.19
-
-node-engineer@0.0.1 /Users/nialljohiggins/projects/node-engineer
-├── chai@1.0.4 
-├─┬ mocha@1.2.0 
+node-engineer@0.1.0 /Users/nialljohiggins/projects/node-engineer
+├── chai@1.0.4  extraneous
+├─┬ mocha@1.2.0  extraneous
 │ ├── commander@0.5.2 
 │ ├── debug@0.7.0 
 │ ├── diff@1.0.2 
@@ -53,3 +49,13 @@ node-engineer@0.0.1 /Users/nialljohiggins/projects/node-engineer
 │ └── wordwrap@0.0.2 
 └── semver@1.0.14 
 ```
+
+Credits
+=======
+
+This is a glue package which relies on:
+
+* (Nave by IsaacS )[https://github.com/isaacs/nave]
+* (semver by IsaacS )[https://github.com/isaacs/node-semver]
+
+

@@ -19,6 +19,6 @@
     "node": ">=0.6.0 <0.7.0"
   }
   , "bin": {
-    "engineer": "../main.js"
+    "engineer": "main.js"
   }
 }
