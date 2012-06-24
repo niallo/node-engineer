@@ -11,7 +11,7 @@ This makes it a no-brainer to run an arbitrary package under whatever version of
 Installation
 ============
 ```
-npm install engineer
+npm install -g engineer
 ```
 
 Usage
