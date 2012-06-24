@@ -5,7 +5,7 @@ Parse package.json, inspect engine property and ensure command runs with right n
 
 Engineer makes it trivial to run a command in an environment where `node` and
 `npm` match those specified by a particular package.json's `engine` field. It
-attempts to do this using already-present node binaries to save time if at all possible.
+attempts to do this using already-present node binaries to save time if at all possible. Otherwise, it will reach out to the Internet, download, compile and install a satisfying version of Node.Js.
 
 Engineer will try in this order, using the first satisfying version it finds:
 
