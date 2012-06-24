@@ -18,7 +18,7 @@ Usage
 =====
 ```
 execute command with node version acceptable to engine package.json property
-usage: node ./main.js
+usage: engineer
 
 Options:
   -c  Shell command         [required]
