@@ -1,17 +1,19 @@
 node-engineer
 =============
 
-Parse package.json, inspect engine property and ensure command runs with right node.js version - avoiding as much compilation as possible.
+Parse package.json, inspect `engines` property and ensure command runs with right node.js version - avoiding as much compilation as possible.
 
 Engineer makes it trivial to run a command in an environment where `node` and
-`npm` match those specified by a particular package.json's `engine` field. It
-attempts to do this using already-present node binaries to save time if at all possible. Otherwise, it will reach out to the Internet, download, compile and install a satisfying version of Node.Js.
+`npm` match those specified by a particular package.json's `engines` field. It
+attempts to do this using already-present node binaries to save time if at all
+possible. Otherwise, it will reach out to the Internet, download, compile and
+install a satisfying version of Node.Js.
 
 Engineer will try in this order, using the first satisfying version it finds:
 
-* Inspect the version of node.js in the `$PATH` to see if it satifies engine.
+* Inspect the version of node.js in the `$PATH` to see if it satifies `engines`.
 * Inspect the version of node.js versions already installed locally via `nave` to
-  see if any of those satifies engine.
+  see if any of those satifies `engines`.
 * Pick the maximum remote version of node.js which satisfies via `nave`.
 
 This makes it a no-brainer to run an arbitrary package under whatever version
@@ -27,7 +29,7 @@ npm install -g node-engineer
 Usage
 =====
 ```
-execute command with node version acceptable to engine package.json property
+execute command with node version acceptable to engines package.json property
 usage: engineer
 
 Options:

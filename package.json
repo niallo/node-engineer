@@ -6,7 +6,7 @@
     "name": "Niall O'Higgins",
     "email": "niallo@unworkable.org"
   }
-  , "description": "Parse package.json, inspect engine property and ensure command runs with right node.js version"
+  , "description": "Parse package.json, inspect engines property and ensure command runs with right node.js version"
   , "dependencies": {
       "nave": ">=0.2.13"
     , "semver": ">=1.0.14"
