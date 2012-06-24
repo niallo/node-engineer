@@ -1,0 +1,24 @@
+{
+    "name": "node-engineer"
+  , "version": "0.1.0"
+  , "private": false
+  , "author": {
+    "name": "Niall O'Higgins",
+    "email": "niallo@unworkable.org"
+  }
+  , "description": "Parse package.json, inspect engine property and ensure command runs with right node.js version"
+  , "dependencies": {
+      "nave": ">=0.2.13"
+    , "semver": ">=1.0.14"
+    , "optimist": ">=0.3.4"
+  }
+  , "scripts": {
+      "test": "./node_modules/mocha/bin/mocha -R tap"
+  }
+  , "engines": {
+    "node": ">=0.6.0 <0.7.0"
+  }
+  , "bin": {
+    "engineer": "../main.js"
+  }
+}
