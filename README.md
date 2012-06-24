@@ -57,6 +57,6 @@ This is a glue package which relies on:
 
 * [Nave by IsaacS](https://github.com/isaacs/nave)
 * [semver by IsaacS](https://github.com/isaacs/node-semver)
-* [optimist by substack](https://github.com/substack/optimist)
+* [optimist by substack](https://github.com/substack/node-optimist)
 
 
