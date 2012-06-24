@@ -55,6 +55,7 @@ running cmd: ["./node_modules/nave/nave.sh","use","0.6.19","npm","ls"]
 ```
 # "node":">=0.6.0 <0.7.0"
 # $PATH contains node 0.6.17
+
 $ engineer -f package.json -c 'npm ls'
 System non-Nave Node.JS version 0.6.17 satisfies range >=0.6.0 <0.7.0
 running cmd: ["npm","ls"]
