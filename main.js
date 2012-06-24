@@ -13,6 +13,16 @@ var argv = require('optimist')
 
 var nave_path = "./node_modules/nave/nave.sh";
 
+// Check what version of node is already in system $PATH
+function getSystemNodeVers(cb) {
+    exec('node -v', function(err, stdout) {
+      if (err) {
+        return cb(err, null);
+      }
+      cb(null, stdout.slice(1).replace('\n',''));
+    });
+}
+
 function readPackage(path) {
   try {
     return(fs.readFileSync(path));
@@ -99,7 +109,7 @@ function run(cmd, cb, hide_dl) {
   });
   child.on('exit', function(code) {
     if (code != 0) {
-      console.log("Error executing command %s: %s", cmd, err);
+      console.log("Error executing command %s: %s", cmd);
       process.exit(1);
     }
     cb();
@@ -110,41 +120,54 @@ var json = readPackage(argv.f);
 var data = parsePackage(json);
 var engine = getEngine(data);
 
-getLocalNodeVers(function(err, versions) {
-  if (err) {
-    versions = [];
-  }
-  console.log("local versions: %j", versions);
-  // Check whether an already-installed node version satisfies the engine
-  var found = false;
-  for (var i=0; i<versions.length; i++) {
-    if (semver.satisfies(versions[i], engine)) {
-      found = versions[i];
-      break;
+// Check for matching system (non-Nave) Node.JS version
+getSystemNodeVers(function(err, version) {
+  if (!err) {
+    if (semver.satisfies(version, engine)) {
+      console.log("System non-Nave Node.JS version %s satisfies range %s", version, engine);
+      return run(argv.c, function() {
+        process.exit(0);
+      });
+
     }
   }
-  var cmd = nave_path + " use " + found + " " + argv.c;
-  if (found) {
-    console.log("Local version %s satisfies range %s", found, engine);
-    run(cmd, function() {
-        process.exit(0);
-    }, true);
-  } else {
-    // No locally-installed version satisfies, find the latest remote version 
-    // install that, then run the command with that version.
-    getRemoteNodeVers(function(versions) {
-      var remote_version = semver.maxSatisfying(versions, engine);
-      if (!remote_version) {
-        console.log("Error: No remote version can satisfy range %s!", engine);
-        process.exit(1);
+  console.log("System non-Nave Node.JS version %s does not satisfy range %s", version, engine);
+  getLocalNodeVers(function(err, versions) {
+    if (err) {
+      versions = [];
+    }
+    console.log("local versions: %j", versions);
+    // Check whether an already-installed-via-Nave node version satisfies the engine
+    var found = false;
+    for (var i=0; i<versions.length; i++) {
+      if (semver.satisfies(versions[i], engine)) {
+        found = versions[i];
+        break;
       }
-      console.log("Remote version %s satisfies range %s", remote_version, engine);
-      var cmd = nave_path + " use " + remote_version + " " + argv.c;
+    }
+    var cmd = nave_path + " use " + found + " " + argv.c;
+    if (found) {
+      console.log("Local version %s satisfies range %s", found, engine);
       run(cmd, function() {
-        process.exit(0);
+          process.exit(0);
       }, true);
-    });
-  }
+    } else {
+      // No locally-installed version satisfies, find the latest remote version 
+      // install that, then run the command with that version.
+      getRemoteNodeVers(function(versions) {
+        var remote_version = semver.maxSatisfying(versions, engine);
+        if (!remote_version) {
+          console.log("Error: No remote version can satisfy range %s!", engine);
+          process.exit(1);
+        }
+        console.log("Remote version %s satisfies range %s", remote_version, engine);
+        var cmd = nave_path + " use " + remote_version + " " + argv.c;
+        run(cmd, function() {
+          process.exit(0);
+        }, true);
+      });
+    }
+
+  });
 
 });
-

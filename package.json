@@ -1,6 +1,6 @@
 {
     "name": "node-engineer"
-  , "version": "0.1.0"
+  , "version": "0.2.0"
   , "private": false
   , "author": {
     "name": "Niall O'Higgins",
@@ -13,7 +13,6 @@
     , "optimist": ">=0.3.4"
   }
   , "scripts": {
-      "test": "./node_modules/mocha/bin/mocha -R tap"
   }
   , "engines": {
     "node": ">=0.6.0 <0.7.0"
