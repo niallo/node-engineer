@@ -9,10 +9,10 @@ attempts to do this using already-present node binaries to save time if at all p
 
 Engineer will try in this order, using the first satisfying version it finds:
 
-* Inspect the version of node.js in the $PATH to see if it satifies engine.
-* Inspect the version of node.js versions already installed locally via nave to
+* Inspect the version of node.js in the `$PATH` to see if it satifies engine.
+* Inspect the version of node.js versions already installed locally via `nave` to
   see if any of those satifies engine.
-* Pick the maximum remote version of node.js which satisfies via nave.
+* Pick the maximum remote version of node.js which satisfies via `nave`.
 
 This makes it a no-brainer to run an arbitrary package under whatever version
 of node it needs. Engineer uses `nave` and `semver` to do the heavy lifting of
