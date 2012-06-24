@@ -3,8 +3,16 @@ node-engineer
 
 Parse package.json, inspect engine property and ensure command runs with right node.js version.
 
-Engineer makes it trivial to run a command in an environment where `node` and `npm` match those
-specified by a particular package.json's `engine` field.
+Engineer makes it trivial to run a command in an environment where `node` and
+`npm` match those specified by a particular package.json's `engine` field. It
+attempts to do this using already-present node binaries to save time.
+
+Engineer will try in this order, using the first satisfying version it finds:
+
+* Inspect the version of node.js in the $PATH to see if it satifies engine.
+* Inspect the version of node.js versions already installed locally via nave to
+  see if any of those satifies engine.
+* Pick the maximum remote version of node.js which satisfies via nave.
 
 This makes it a no-brainer to run an arbitrary package under whatever version of node it needs. Engineer uses `nave` and `semver` to do the heavy lifting ot installing and checking for valid node.js versions.
 
