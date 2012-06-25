@@ -108,19 +108,7 @@ function run(cmd, cb, hide_dl) {
     console.log(data.toString());
   });
   child.stderr.on('data', function(data) {
-    d = data.toString()
-    // Try to filter out most of the curl download
-    if (hide_dl == true) {
-      if (!done && d.indexOf('100.0%') != -1) {
-        console.log("download complete");
-        done = true;
-      }
-      if (done) {
-        console.log(d);
-      }
-    } else {
-      console.log(d);
-    }
+    console.log(data.toString());
   });
   child.on('exit', function(code) {
     if (code != 0) {
@@ -161,7 +149,7 @@ getSystemNodeVers(function(err, version) {
         break;
       }
     }
-    var cmd = nave_path + " use " + found + " " + argv.c;
+    var cmd = nave_path + " -o'-Lfs' use " + found + " " + argv.c;
     if (found) {
       console.log("Local version %s satisfies range %s", found, engine);
       run(cmd, function() {
@@ -177,7 +165,7 @@ getSystemNodeVers(function(err, version) {
           process.exit(1);
         }
         console.log("Remote version %s satisfies range %s", remote_version, engine);
-        var cmd = nave_path + " use " + remote_version + " " + argv.c;
+        var cmd = nave_path + " -o'-Lfs' use " + remote_version + " " + argv.c;
         run(cmd, function() {
           process.exit(0);
         }, true);

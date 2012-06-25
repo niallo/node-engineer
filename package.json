@@ -1,6 +1,6 @@
 {
     "name": "node-engineer"
-  , "version": "0.2.3"
+  , "version": "0.2.4"
   , "private": false
   , "author": {
     "name": "Niall O'Higgins",
@@ -8,7 +8,7 @@
   }
   , "description": "Parse package.json, inspect engines property and ensure command runs with right node.js version"
   , "dependencies": {
-      "nave": ">=0.2.13"
+      "nave": "git://github.com/niallo/nave.git#d8c73ff6cd92799b4831111f7b2eb92decf498ba"
     , "semver": ">=1.0.14"
     , "optimist": ">=0.3.4"
   }
