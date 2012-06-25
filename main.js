@@ -105,10 +105,10 @@ function run(cmd, cb, hide_dl) {
   var done = false;
   var d;
   child.stdout.on('data', function(data) {
-    console.log(data.toString());
+    process.stdout.write(data.toString());
   });
   child.stderr.on('data', function(data) {
-    console.log(data.toString());
+    process.stderr.write(data.toString());
   });
   child.on('exit', function(code) {
     if (code != 0) {
