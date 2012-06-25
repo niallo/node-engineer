@@ -1,6 +1,6 @@
 {
     "name": "node-engineer"
-  , "version": "0.2.2"
+  , "version": "0.2.3"
   , "private": false
   , "author": {
     "name": "Niall O'Higgins",
@@ -15,7 +15,7 @@
   , "scripts": {
   }
   , "engines": {
-    "node": ">=0.6.0 <0.7.0"
+    "node": ">=0.6.0"
   }
   , "bin": {
     "engineer": "main.js"
