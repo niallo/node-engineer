@@ -11,7 +11,19 @@ var argv = require('optimist')
     semver = require('semver'),
     spawn = require('child_process').spawn;
 
-var nave_path = "./node_modules/nave/nave.sh";
+function findNave() {
+  // First try under ./node_modules
+  var nave_path = "./node_modules/nave/nave.sh";
+  try {
+    fs.statSync(nave_path);
+    return nave_path;
+  } catch(e) {
+    // Not found - now try relative to this file's location
+    nave_path = __dirname + "/node_modules/nave/nave.sh";
+    fs.statSync(nave_path);
+    return nave_path
+  }
+}
 
 // Check what version of node is already in system $PATH
 function getSystemNodeVers(cb) {
@@ -53,7 +65,7 @@ function getEngine(pkgData) {
 // Look in ~/.nave/installed to list currently installed Node.JS versions
 // @param cb function(err, [versions])
 function getLocalNodeVers(cb) {
-  var nave_path =  process.env.HOME + "/.nave/installed/";
+  var nave_path = process.env.HOME + "/.nave/installed/";
 
   fs.readdir(nave_path, cb);
 }
@@ -89,11 +101,12 @@ function run(cmd, cb, hide_dl) {
   console.log("running cmd: %j", cmd);
   var child = spawn(cmd[0], cmd.slice(1));
   var done = false;
+  var d;
   child.stdout.on('data', function(data) {
     console.log(data.toString());
   });
   child.stderr.on('data', function(data) {
-    var d = data.toString()
+    d = data.toString()
     // Try to filter out most of the curl download
     if (hide_dl == true) {
       if (!done && d.indexOf('100.0%') != -1) {
@@ -109,13 +122,14 @@ function run(cmd, cb, hide_dl) {
   });
   child.on('exit', function(code) {
     if (code != 0) {
-      console.log("Error executing command %s: %s", cmd);
+      console.log("Error executing command %s: %s", cmd, d);
       process.exit(1);
     }
     cb();
   });
 }
 
+var nave_path = findNave();
 var json = readPackage(argv.f);
 var data = parsePackage(json);
 var engine = getEngine(data);
