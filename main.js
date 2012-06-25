@@ -149,7 +149,7 @@ getSystemNodeVers(function(err, version) {
         break;
       }
     }
-    var cmd = nave_path + " -o'-Lfs' use " + found + " " + argv.c;
+    var cmd = nave_path + " -o -Lfs use " + found + " " + argv.c;
     if (found) {
       console.log("Local version %s satisfies range %s", found, engine);
       run(cmd, function() {
@@ -165,7 +165,7 @@ getSystemNodeVers(function(err, version) {
           process.exit(1);
         }
         console.log("Remote version %s satisfies range %s", remote_version, engine);
-        var cmd = nave_path + " -o'-Lfs' use " + remote_version + " " + argv.c;
+        var cmd = nave_path + " -o -Lfs use " + remote_version + " " + argv.c;
         run(cmd, function() {
           process.exit(0);
         }, true);
