@@ -13,15 +13,17 @@ var argv = require('optimist')
 
 function findNave() {
   // First try under ./node_modules
-  var nave_path = "./node_modules/nave/nave.sh";
+  var path = "/node_modules/nave/nave.sh";
+  var res;
   try {
-    fs.statSync(nave_path);
-    return nave_path;
+    res = "." + path;
+    fs.statSync(res);
+    return res;
   } catch(e) {
     // Not found - now try relative to this file's location
-    nave_path = __dirname + "/node_modules/nave/nave.sh";
-    fs.statSync(nave_path);
-    return nave_path
+    res = __dirname + path;
+    fs.statSync(res);
+    return res
   }
 }
 
