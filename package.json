@@ -8,7 +8,7 @@
   }
   , "description": "Parse package.json, inspect engines property and ensure command runs with right node.js version"
   , "dependencies": {
-      "nave": "git://github.com/niallo/nave.git#d8c73ff6cd92799b4831111f7b2eb92decf498ba"
+      "nave": "git://github.com/niallo/nave.git#5fdb24773195edfc0e6020a730d506b2046dc922"
     , "semver": ">=1.0.14"
     , "optimist": ">=0.3.4"
   }
