@@ -100,10 +100,8 @@ function getRemoteNodeVers(cb) {
 function run(cmd, cb, hide_dl) {
   cmd = cmd.split(/\s+/);
 
-  console.log("running cmd: %j", cmd);
   var child = spawn(cmd[0], cmd.slice(1));
   var done = false;
-  var d;
   child.stdout.on('data', function(data) {
     process.stdout.write(data.toString());
   });
@@ -112,7 +110,7 @@ function run(cmd, cb, hide_dl) {
   });
   child.on('exit', function(code) {
     if (code != 0) {
-      console.log("Error executing command %s: %s", cmd, d);
+      console.log("Error executing command %s - exit code: %s", cmd, code);
       process.exit(1);
     }
     cb();
