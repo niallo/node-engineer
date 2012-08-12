@@ -57,8 +57,8 @@ function parsePackage(contents) {
 
 function getEngine(pkgData) {
   var engine;
-  if (data.engines && data.engines.node) {
-    engine = data.engines.node;
+  if (pkgData.engines && pkgData.engines.node) {
+    engine = pkgData.engines.node;
   } else {
     engine = "*";
   }
